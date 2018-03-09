@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <script src="https://unpkg.com/react/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script> -->
+
+    <script src="./js/react.development.js"></script>
+    <script src="./js/react-dom.development.js"></script>
+    <script src="./js/babel.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Amatic+SC" rel="stylesheet">
+
+    <title>React Tic Tac Toe</title>
+    <style>
+
+    body {
+      background-image: url("./images/pink_tile.png");
+      background-repeat: repeat;
+      font-family: 'Amatic SC', cursive;
+    }
+
+    .box {
+      background: white;
+      display: inline-block;
+      height: 700px;
+      width: 700px;
+      border: 10px solid pink;
+      margin-top: 200px;
+    }
+    h1 {
+      font-size: 3.1rem;
+      margin-top: 0em;
+      margin-bottom: 0.5em;
+    }
+
+    h2 {
+      font-size: 2.5rem;
+      margin-top: 0.5em;
+      margin-bottom: 0.5em;
+    }
+
+    h3 {
+      font-size: 2rem;
+      margin-top: 0.5em;
+      margin-bottom: 0.5em;
+    }
+
+    .container {
+      background: pink;
+      display: inline-block;
+      border: 5px solid pink;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 130px);
+      grid-template-rows: repeat(3, 130px);
+      grid-gap: 5px;
+    }
+
+    .cell {
+       /* center the cell content */
+      justify-content: center;
+      align-items: center;
+      display: flex;
+      /* font-family: Arial; */
+      font-family: 'Amatic SC', cursive;
+      font-size: 5rem;
+      /* font-weight: bold; */
+      background: white;
+
+        /* Make the text unselectable in Firefox   */
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    .cell:hover {
+      background: pink;
+      background-color:rgba(255,255,255,0.5)
+    }
+
+    .component {
+      margin-left: 5px;
+      background: white;
+      display: inline-block;
+      width: 240px;
+      justify-content: center;
+      align-items: center;
+      /* border: 3px solid #ccc; */
+    }
+
+    .center-label {
+      /* font-family: Arial; */
+      font-family: 'Amatic SC', cursive;
+      /* margin-left: 5px; */
+      /* margin-right: auto; */
+      width: 300px;
+      /* border: 1px solid black; */
+      text-align: center;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 50px);
+      grid-template-rows: repeat(1, 50px);
+      grid-gap: 50px;
+      justify-content: center;
+    }
+
+    .cell-2 {
+      border: 3px solid #ccc;
+      justify-content: center;
+      align-items: center;
+      display: flex;
+      /* font-family: Arial; */
+      font-family: 'Amatic SC', cursive;
+      color: #ccc;
+      font-size: 2.6rem;
+      font-weight: bold;
+      background: white;
+      cursor: pointer;
+    }
+
+    .cell-2:hover {
+      border: 3px solid #222;
+      color: #222;
+      background: pink;
+    }
+
+    .cell-2:active {
+      border: 3px solid #222;
+      color: #222;
+      background: pink;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(1, 190px);
+      grid-template-rows: repeat(1, 50px);
+      grid-gap: 50px;
+      justify-content: center;
+    }
+
+    .cell-3 {
+      border: 3px solid #ccc;
+      padding: 10px;
+      justify-content: center;
+      align-items: center;
+      display: flex;
+      font-family: Arial;
+      color: #ccc;
+      font-size: 1.6rem;
+      font-weight: bold;
+      background: white;
+      cursor: pointer;
+    }
+
+    .cell-3:hover {
+      border: 3px solid #222;
+      color: #222;
+      background: pink;
+    }
+
+    .cell-3:active {
+      border: 3px solid #222;
+      color: #222;
+      background: pink;
+    }
+
+    </style>
+  </head>
+  <body>
+    <center>
+    <div class="box">
+      <br>
+      <div id="app"></div>
+      <script type="text/babel" src="kh-tic-tac-toe.js"></script>
+    </div>
+
+  </body>
+</html>

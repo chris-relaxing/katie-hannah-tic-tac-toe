@@ -2,8 +2,12 @@
 // To Do
 // A new choice, after choosing who goes first, they can choose who is X and who is O
 // Another choice is whether or not to use photos!
-// The winner gets a photo pop-up prize!
-// Fix the bug that allows a player to change an X to an O (and vice versa)
+// The winner gets a photo pop-up prize! Figure out how to use a modal for this.
+// Change in the code: Use only one Katie pic and one Hannah pic per game!
+// Stop the ability to toggle through photos on click after a cell has been populated.
+// make the script load the images from a file instead of hard coded.
+// implement random images on the board. -DONE (but put on hold)
+// Fix the bug that allows a player to change an X to an O (and vice versa) -DONE
 
 // The Game componenet is the parent component. It keeps track of most of the state in the game.
 // It also renders the game board.
@@ -18,12 +22,14 @@ class Game extends React.Component {
     this.changeTurns = this.changeTurns.bind(this);
     this.setGameInProgress = this.setGameInProgress.bind(this);
     this.setCatsGame = this.setCatsGame.bind(this);
+    this.loadRandImages = this.loadRandImages.bind(this);
 
     // set initial states
     this.state = {
       x_locations : [],
       o_locations : [],
       x_and_os: ['', '', '', '', '', '', '', '', ''],   // to keep track of the board
+      img_board: ['', '', '', '', '', '', '', '', ''],
       number_of_turns: 0,
       currentTurn: 'X',
       gameInProgress: false,
@@ -65,6 +71,33 @@ class Game extends React.Component {
     }
   }
 
+  loadRandImages(clicked_id) {
+    let k_images = ["k1.jpg", "k2.jpg", "k3.jpg", "k4.jpg", "k5.jpg"];
+    let h_images = ["h1.jpg", "h2.jpg", "h3.jpg", "h4.jpg", "h5.jpg", "h6.jpg"];
+    console.log("*img_board:", this.state.img_board);
+    console.log("*clicked_id:", clicked_id);
+    console.log("*xo_value", this.state.x_and_os[clicked_id-1]);
+
+    if(this.state.x_and_os[clicked_id-1] == "X"){
+      let img = k_images[Math.floor(Math.random() * k_images.length)];
+      let img_path = './images/' + img;
+      let updated_board = this.state.img_board;
+      updated_board[clicked_id-1] = img_path;
+      this.setState({
+        img_board: updated_board
+      });
+    }
+    if(this.state.x_and_os[clicked_id-1] == "O"){
+      let img = h_images[Math.floor(Math.random() * h_images.length)];
+      let img_path = './images/' + img;
+      let updated_board = this.state.img_board;
+      updated_board[clicked_id-1] = img_path;
+      this.setState({
+        img_board: updated_board
+      });
+    }
+  }
+
   cellClicked(id){
     // Make sure the player can't click a cell that has already been clicked
     if(this.state.x_and_os[id-1] == '') {
@@ -79,12 +112,14 @@ class Game extends React.Component {
   newGame(){
     // reset all states
     let new_board = ['', '', '', '', '', '', '', '', ''];
+    let new_img_board = ['', '', '', '', '', '', '', '', ''];
     let x_loc = [];
     let o_loc = [];
     this.setState({
       x_locations: x_loc,
       o_locations: o_loc,
       x_and_os: new_board,   // to keep track of the board
+      img_board: new_img_board,
       number_of_turns: 0,
       currentTurn: 'X',
       gameInProgress: false,
@@ -173,23 +208,32 @@ class Game extends React.Component {
       <div>
         <div className="container">
           <div className="grid">
-            <Cell className="cell" id="1" currentTurn={this.state.currentTurn} xo={this.state.x_and_os} newGame={this.newGame} gameWon={this.state.gameWon} numturns={this.state.number_of_turns}
+            <Cell className="cell" id="1" currentTurn={this.state.currentTurn} xo={this.state.x_and_os} newGame={this.newGame} img_board={this.state.img_board}
+                                          gameWon={this.state.gameWon} numturns={this.state.number_of_turns} loadRandImages={this.loadRandImages}
                                           incrementNumberTurns={this.incrementNumberTurns} cellClicked={this.cellClicked} gameinprogress={this.state.gameInProgress} setCatsGame={this.setCatsGame}/>
-            <Cell className="cell" id="2" currentTurn={this.state.currentTurn} xo={this.state.x_and_os} newGame={this.newGame} gameWon={this.state.gameWon} numturns={this.state.number_of_turns}
+            <Cell className="cell" id="2" currentTurn={this.state.currentTurn} xo={this.state.x_and_os} newGame={this.newGame} img_board={this.state.img_board}
+                                          gameWon={this.state.gameWon} numturns={this.state.number_of_turns} loadRandImages={this.loadRandImages}
                                           incrementNumberTurns={this.incrementNumberTurns} cellClicked={this.cellClicked} gameinprogress={this.state.gameInProgress} setCatsGame={this.setCatsGame}/>
-            <Cell className="cell" id="3" currentTurn={this.state.currentTurn} xo={this.state.x_and_os} newGame={this.newGame} gameWon={this.state.gameWon} numturns={this.state.number_of_turns}
+            <Cell className="cell" id="3" currentTurn={this.state.currentTurn} xo={this.state.x_and_os} newGame={this.newGame} img_board={this.state.img_board}
+                                          gameWon={this.state.gameWon} numturns={this.state.number_of_turns} loadRandImages={this.loadRandImages}
                                           incrementNumberTurns={this.incrementNumberTurns} cellClicked={this.cellClicked} gameinprogress={this.state.gameInProgress} setCatsGame={this.setCatsGame}/>
-            <Cell className="cell" id="4" currentTurn={this.state.currentTurn} xo={this.state.x_and_os} newGame={this.newGame} gameWon={this.state.gameWon} numturns={this.state.number_of_turns}
+            <Cell className="cell" id="4" currentTurn={this.state.currentTurn} xo={this.state.x_and_os} newGame={this.newGame} img_board={this.state.img_board}
+                                          gameWon={this.state.gameWon} numturns={this.state.number_of_turns} loadRandImages={this.loadRandImages}
                                           incrementNumberTurns={this.incrementNumberTurns} cellClicked={this.cellClicked} gameinprogress={this.state.gameInProgress} setCatsGame={this.setCatsGame}/>
-            <Cell className="cell" id="5" currentTurn={this.state.currentTurn} xo={this.state.x_and_os} newGame={this.newGame} gameWon={this.state.gameWon} numturns={this.state.number_of_turns}
+            <Cell className="cell" id="5" currentTurn={this.state.currentTurn} xo={this.state.x_and_os} newGame={this.newGame} img_board={this.state.img_board}
+                                          gameWon={this.state.gameWon} numturns={this.state.number_of_turns} loadRandImages={this.loadRandImages}
                                           incrementNumberTurns={this.incrementNumberTurns} cellClicked={this.cellClicked} gameinprogress={this.state.gameInProgress} setCatsGame={this.setCatsGame}/>
-            <Cell className="cell" id="6" currentTurn={this.state.currentTurn} xo={this.state.x_and_os} newGame={this.newGame} gameWon={this.state.gameWon} numturns={this.state.number_of_turns}
+            <Cell className="cell" id="6" currentTurn={this.state.currentTurn} xo={this.state.x_and_os} newGame={this.newGame} img_board={this.state.img_board}
+                                          gameWon={this.state.gameWon} numturns={this.state.number_of_turns} loadRandImages={this.loadRandImages}
                                           incrementNumberTurns={this.incrementNumberTurns} cellClicked={this.cellClicked} gameinprogress={this.state.gameInProgress} setCatsGame={this.setCatsGame}/>
-            <Cell className="cell" id="7" currentTurn={this.state.currentTurn} xo={this.state.x_and_os} newGame={this.newGame} gameWon={this.state.gameWon} numturns={this.state.number_of_turns}
+            <Cell className="cell" id="7" currentTurn={this.state.currentTurn} xo={this.state.x_and_os} newGame={this.newGame} img_board={this.state.img_board}
+                                          gameWon={this.state.gameWon} numturns={this.state.number_of_turns} loadRandImages={this.loadRandImages}
                                           incrementNumberTurns={this.incrementNumberTurns} cellClicked={this.cellClicked} gameinprogress={this.state.gameInProgress} setCatsGame={this.setCatsGame}/>
-            <Cell className="cell" id="8" currentTurn={this.state.currentTurn} xo={this.state.x_and_os} newGame={this.newGame} gameWon={this.state.gameWon} numturns={this.state.number_of_turns}
+            <Cell className="cell" id="8" currentTurn={this.state.currentTurn} xo={this.state.x_and_os} newGame={this.newGame} img_board={this.state.img_board}
+                                          gameWon={this.state.gameWon} numturns={this.state.number_of_turns} loadRandImages={this.loadRandImages}
                                           incrementNumberTurns={this.incrementNumberTurns} cellClicked={this.cellClicked} gameinprogress={this.state.gameInProgress} setCatsGame={this.setCatsGame}/>
-            <Cell className="cell" id="9" currentTurn={this.state.currentTurn} xo={this.state.x_and_os} newGame={this.newGame} gameWon={this.state.gameWon} numturns={this.state.number_of_turns}
+            <Cell className="cell" id="9" currentTurn={this.state.currentTurn} xo={this.state.x_and_os} newGame={this.newGame} img_board={this.state.img_board}
+                                          gameWon={this.state.gameWon} numturns={this.state.number_of_turns} loadRandImages={this.loadRandImages}
                                           incrementNumberTurns={this.incrementNumberTurns} cellClicked={this.cellClicked} gameinprogress={this.state.gameInProgress} setCatsGame={this.setCatsGame}/>
           </div>
         </div>
@@ -234,6 +278,13 @@ class Choosefirstplayer extends React.Component {
       }
       else {
         if (this.props.catsGame || this.props.numturns == 9){
+
+          // For loading cat images on Cat's Game
+          // let cat_images = ["c1.jpg", "c2.jpg", "c3.jpg", "c4.jpg", "c5.jpg", "c6.jpg",
+          //                   "c7.jpg", "c8.jpg", "c9.jpg", "c10.jpg", "c11.jpg", "c12.jpg", "c13.jpg"];
+          // let img = cat_images[Math.floor(Math.random() * cat_images.length)];
+          // let img_path = './images/cats/' + img;
+
           return (
               <div>
                 <h2 className="center-label">Cat&#39;s Game!</h2>
@@ -323,11 +374,13 @@ class Playagain extends React.Component {
         clicked: false,
       }
      this.handleClick = this.handleClick.bind(this);
+
    }
    handleClick (){
      this.setState({
        clicked: !this.state.clicked,
      });
+
 
      let clicked_id = this.props.id;
      console.log("Cell " + clicked_id + " was clicked");
@@ -346,11 +399,15 @@ class Playagain extends React.Component {
          // Call the parent functions:
          this.props.incrementNumberTurns(clicked_id);
          this.props.cellClicked(clicked_id);
+         // this.props.loadRandImages(clicked_id);
        }
      }
    }
 
    render() {
+
+      console.log("--Cell:", this.props.xo[this.props.id-1]);
+
       return (
         <div className="cell" onClick={this.handleClick} id={this.props.id}>
           {this.props.xo[this.props.id-1]}
@@ -358,6 +415,11 @@ class Playagain extends React.Component {
       )
    }
  }
+ // This is for Xs and Os
+ // {this.props.xo[this.props.id-1]}
+
+ // This is for using images instead of Xs and Os
+ // <img src={this.props.img_board[this.props.id-1]} />
 
 // This is the main React render(). It loads the parent component Game.
 ReactDOM.render(

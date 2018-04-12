@@ -12,6 +12,10 @@
     <script src="./js/babel.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Amatic+SC" rel="stylesheet">
 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
     <title>React Tic Tac Toe</title>
     <style>
 
@@ -47,13 +51,13 @@
       margin-bottom: 0.5em;
     }
 
-    .container {
+    .game-container {
       background: pink;
       display: inline-block;
       border: 5px solid pink;
     }
 
-    .grid {
+    .grid-1 {
       display: grid;
       grid-template-columns: repeat(3, 130px);
       grid-template-rows: repeat(3, 130px);
@@ -173,6 +177,16 @@
       background: pink;
     }
 
+    .modal-dialog{
+      position: relative;
+      display: table; /* This is important */
+      overflow-y: auto;
+      overflow-x: auto;
+      width: auto;
+      min-width: 800px;
+      min-height: 600px;
+    }
+
     </style>
   </head>
   <body>
@@ -181,6 +195,30 @@
       <br>
       <div id="app"></div>
       <script type="text/babel" src="kh-tic-tac-toe.js"></script>
+    </div>
+
+
+    <div class="container-x">
+      <!-- Modal -->
+      <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog modal-lg">
+
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Modal Header</h4>
+            </div>
+            <div class="modal-body">
+              <p><img src="/img/modal_contents.png"></p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
     </div>
 
   </body>

@@ -206,8 +206,8 @@ class Game extends React.Component {
   render() {
     return (
       <div>
-        <div className="container">
-          <div className="grid">
+        <div className="game-container">
+          <div className="grid-1">
             <Cell className="cell" id="1" currentTurn={this.state.currentTurn} xo={this.state.x_and_os} newGame={this.newGame} img_board={this.state.img_board}
                                           gameWon={this.state.gameWon} numturns={this.state.number_of_turns} loadRandImages={this.loadRandImages}
                                           incrementNumberTurns={this.incrementNumberTurns} cellClicked={this.cellClicked} gameinprogress={this.state.gameInProgress} setCatsGame={this.setCatsGame}/>
@@ -280,14 +280,15 @@ class Choosefirstplayer extends React.Component {
         if (this.props.catsGame || this.props.numturns == 9){
 
           // For loading cat images on Cat's Game
-          // let cat_images = ["c1.jpg", "c2.jpg", "c3.jpg", "c4.jpg", "c5.jpg", "c6.jpg",
-          //                   "c7.jpg", "c8.jpg", "c9.jpg", "c10.jpg", "c11.jpg", "c12.jpg", "c13.jpg"];
-          // let img = cat_images[Math.floor(Math.random() * cat_images.length)];
-          // let img_path = './images/cats/' + img;
+          let cat_images = ["c1.jpg", "c2.jpg", "c3.jpg", "c4.jpg", "c5.jpg", "c6.jpg",
+                            "c7.jpg", "c8.jpg", "c9.jpg", "c10.jpg", "c11.jpg", "c12.jpg", "c13.jpg"];
+          let img = cat_images[Math.floor(Math.random() * cat_images.length)];
+          let img_path = './images/cats/' + img;
 
+          $('#myModal').modal('toggle');
           return (
               <div>
-                <h2 className="center-label">Cat&#39;s Game!</h2>
+                <h2 className="center-label" data-toggle="modal" data-target="#myModal">Cat&#39;s Game!</h2>
                 <Playagain className="cell-3" newGame={this.props.newGame} gameWon={this.props.gameWon}/>
               </div>
           )

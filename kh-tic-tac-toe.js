@@ -1,4 +1,3 @@
-
 // To Do
 // A new choice, after choosing who goes first, they can choose who is X and who is O
 // Another choice is whether or not to use photos!
@@ -126,6 +125,7 @@ class Game extends React.Component {
       winner: "",
       gameWon: false,
       catsGame: false,
+      modal: false
     });
   }
 
@@ -280,15 +280,15 @@ class Choosefirstplayer extends React.Component {
         if (this.props.catsGame || this.props.numturns == 9){
 
           // For loading cat images on Cat's Game
-          let cat_images = ["c1.jpg", "c2.jpg", "c3.jpg", "c4.jpg", "c5.jpg", "c6.jpg",
-                            "c7.jpg", "c8.jpg", "c9.jpg", "c10.jpg", "c11.jpg", "c12.jpg", "c13.jpg"];
-          let img = cat_images[Math.floor(Math.random() * cat_images.length)];
-          let img_path = './images/cats/' + img;
-
-          $('#myModal').modal('toggle');
+          // let cat_images = ["c1.jpg", "c2.jpg", "c3.jpg", "c4.jpg", "c5.jpg", "c6.jpg",
+          //                   "c7.jpg", "c8.jpg", "c9.jpg", "c10.jpg", "c11.jpg", "c12.jpg", "c13.jpg"];
+          // let img = cat_images[Math.floor(Math.random() * cat_images.length)];
+          // let img_path = './images/cats/' + img;
+          // <h2 className="center-label" data-toggle="modal" data-target="#myModal">Cat&#39;s Game!</h2>
+          // $('#myModal').modal('toggle');
           return (
               <div>
-                <h2 className="center-label" data-toggle="modal" data-target="#myModal">Cat&#39;s Game!</h2>
+                <h2 className="center-label">Cat&#39;s Game!</h2>
                 <Playagain className="cell-3" newGame={this.props.newGame} gameWon={this.props.gameWon}/>
               </div>
           )
@@ -322,6 +322,9 @@ class Choosefirstplayer extends React.Component {
     }
   }
 }
+
+
+
 
 // The Playerbox component is a child of the Choosefirstplayer component. It renders the hoverable X and O 'buttons'.
 class Playerbox extends React.Component {
